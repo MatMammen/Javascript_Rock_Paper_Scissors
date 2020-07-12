@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+        //Your JavaScipt goes here!
+        function computerPlay() {
+            let move = Math.floor(Math.random()*3);
+            switch (move) {
+                case 0:
+                    move = 'Rock';
+                    break;
+                case 1:
+                    move = 'Paper';
+                    break;
+                case 2:
+                    move = 'Scissors';
+                    break;
+            }
+            return move;
+        }
+        function playRound() {
+            let playerSelection = prompt()
+            let computerSelection = computerPlay()
+            if (playerSelection == 'Rock') {
+                switch (computerSelection) {
+                    case 'Rock':
+                        reply = 'You tied!';
+                        break;
+                    case 'Paper':
+                        reply = 'You Lose! Paper beats Rock';
+                        break;
+                    case 'Scissors':
+                        reply = 'You Win! Rock beats Scissors';
+                        break;
+                }
+            }
+            else if (playerSelection == 'Paper') {
+                switch (computerSelection) {
+                    case 'Rock':
+                        reply = 'You Win! Paper beats Rock';
+                        break;
+                    case 'Paper':
+                        reply = 'You tied!';
+                        break;
+                    case 'Scissors':
+                        reply = 'You Lose! Scissors beats Paper';
+                        break;
+                }
+            }
+            else {
+                switch (computerSelection) {
+                    case 'Rock':
+                        reply = 'You Lose! Rock beats Paper';
+                        break;
+                    case 'Paper':
+                        reply = 'You Win! Scissors beats Paper';
+                        break;
+                    case 'Scissors':
+                        reply = 'You tied!';
+                        break;
+                }
+            }
+            return reply;
+        }
+        console.log("Hello, World")
+    </script>
+</body>
+</html>
