@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock-Paper-Scissors2.0</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+        function capitalize(params) {
+            params = params.toLowerCase();
+            params = params[0].toUpperCase() + params.substring(1);
+            return params;
+    }
+        function computerPlay() {
+            let move = Math.floor(Math.random()*3);
+            switch (move) {
+                case 0:
+                    move = 'Rock';
+                    break;
+                case 1:
+                    move = 'Paper';
+                    break;
+                case 2:
+                    move = 'Scissors';
+                    break;
+            }
+            return move;
+        }
+        function playRound(playerSelection, computerSelection) {
+            if (playerSelection == 'Rock') {
+                switch (computerSelection) {
+                    case 'Rock':
+                        reply = 'You tied!';
+                        break;
+                    case 'Paper':
+                        reply = 'You Lose! Paper beats Rock';
+                        compwin = compwin + 1
+                        break;
+                    case 'Scissors':
+                        reply = 'You Win! Rock beats Scissors';
+                        playerwin = playerwin + 1
+                        break;
+                }
+            }
+            else if (playerSelection == 'Paper') {
+                switch (computerSelection) {
+                    case 'Rock':
+                        reply = 'You Win! Paper beats Rock';
+                        playerwin = playerwin + 1
+                        break;
+                    case 'Paper':
+                        reply = 'You tied!';
+                        break;
+                    case 'Scissors':
+                        reply = 'You Lose! Scissors beats Paper';
+                        compwin = compwin + 1
+                        break;
+                }
+            }
+            else {
+                switch (computerSelection) {
+                    case 'Rock':
+                        reply = 'You Lose! Rock beats Paper';
+                        compwin = compwin + 1
+                        break;
+                    case 'Paper':
+                        reply = 'You Win! Scissors beats Paper';
+                        playerwin = playerwin + 1
+                        break;
+                    case 'Scissors':
+                        reply = 'You tied!';
+                        break;
+                }
+            }
+            return reply;
+        }
+        function game() {
+            let playerSelection = capitalize(prompt());
+            let computerSelection = computerPlay();
+            console.log(playRound(playerSelection, computerSelection));
+            console.log('Computer: ' + compwin);
+            console.log('You: ' + playerwin);
+            let looping;
+            for ( looping = 0; looping < 4; looping++) {
+                playerSelection = capitalize(prompt());
+                computerSelection = computerPlay();
+                console.log(playRound(playerSelection, computerSelection));
+                console.log('Computer: ' + compwin);
+                console.log('You: ' + playerwin);
+            }
+            if (compwin > playerwin) {
+                console.log('The computer wins!');
+            }
+            else if (playerwin > compwin) {
+                console.log('You win!');
+            }
+            else {
+                console.log('You tied!');
+            }
+        }
+        let compwin = 0;
+        let playerwin = 0;
+    </script>
+</body>
+</html>
