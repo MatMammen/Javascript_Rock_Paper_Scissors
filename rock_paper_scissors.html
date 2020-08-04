@@ -5,12 +5,25 @@
     <meta charset="UTF-8"/>
 </head>
 <body>
+    <button id = "Rock">Rock</button>
+    <button id = "Paper">Paper</button>
+    <button id = "Scissors">Scissors</button>
     <script>
-        function capitalize(params) {
-            params = params.toLowerCase();
-            params = params[0].toUpperCase() + params.substring(1);
-            return params;
-    }
+        const rock = document.querySelector('#Rock');
+        rock.addEventListener('click', () => {
+            Reply = playRound('Rock', computerPlay());
+            alert(Reply);
+        });
+        const paper = document.querySelector('#Paper');
+        paper.addEventListener('click', () => {
+            Reply = playRound('Paper', computerPlay());
+            alert(Reply);
+        });
+        const scissors = document.querySelector('#Scissors');
+        scissors.addEventListener('click', () => {
+            Reply = playRound('Scissors', computerPlay());
+            alert(Reply);
+        });
         function computerPlay() {
             let move = Math.floor(Math.random()*3);
             switch (move) {
