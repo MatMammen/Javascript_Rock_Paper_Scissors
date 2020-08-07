@@ -8,21 +8,40 @@
     <button id = "Rock">Rock</button>
     <button id = "Paper">Paper</button>
     <button id = "Scissors">Scissors</button>
+    <p id ="results"></p>
+    <p id = "compTag">Computer:</p>
+    <p id = "compScore"></p>
+    <p id = "playerTag">Player:</p>
+    <p id = "playerScore"></p>
+    <div id = "container"></div>
     <script>
+        let playerWin = 0;
+        let compWin = 0;
         const rock = document.querySelector('#Rock');
+        const compScore = document.querySelector('#compScore');
+        const playerScore = document.querySelector('#playerScore');
         rock.addEventListener('click', () => {
             Reply = playRound('Rock', computerPlay());
-            alert(Reply);
+            compWin = (Reply == 1) ? compWin + 1 : compWin;
+            playerWin = (Reply == 2) ? playerWin + 1 : playerWin;
+            compScore.textContent = compWin;
+            playerScore.textContent = playerWin;
         });
         const paper = document.querySelector('#Paper');
         paper.addEventListener('click', () => {
             Reply = playRound('Paper', computerPlay());
-            alert(Reply);
+            compWin = (Reply == 1) ? compWin + 1 : compWin;
+            playerWin = (Reply == 2) ? playerWin + 1 : playerWin;
+            compScore.textContent = compWin;
+            playerScore.textContent = playerWin;
         });
         const scissors = document.querySelector('#Scissors');
         scissors.addEventListener('click', () => {
             Reply = playRound('Scissors', computerPlay());
-            alert(Reply);
+            compWin = (Reply == 1) ? compWin + 1 : compWin;
+            playerWin = (Reply == 2) ? playerWin + 1 : playerWin;
+            compScore.textContent = compWin;
+            playerScore.textContent = playerWin;
         });
         function computerPlay() {
             let move = Math.floor(Math.random()*3);
@@ -40,6 +59,8 @@
             return move;
         }
         function playRound(playerSelection, computerSelection) {
+            let compwin = 0;
+            let playerwin = 0;
             if (playerSelection == 'Rock') {
                 switch (computerSelection) {
                     case 'Rock':
@@ -85,7 +106,8 @@
                         break;
                 }
             }
-            return reply;
+            alert(reply);
+            return (compwin > 0 ? 1 : playerwin > 0 ? 2 : 0);
         }
         function game() {
             let playerSelection = capitalize(prompt());
@@ -111,8 +133,7 @@
                 console.log('You tied!');
             }
         }
-        let compwin = 0;
-        let playerwin = 0;
+
     </script>
 </body>
 </html>
