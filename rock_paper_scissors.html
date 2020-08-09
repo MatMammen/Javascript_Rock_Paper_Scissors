@@ -17,31 +17,30 @@
     <script>
         let playerWin = 0;
         let compWin = 0;
+        const container = document.querySelector('#container');
+        const results = document.querySelector('#results')
         const rock = document.querySelector('#Rock');
         const compScore = document.querySelector('#compScore');
         const playerScore = document.querySelector('#playerScore');
         rock.addEventListener('click', () => {
-            Reply = playRound('Rock', computerPlay());
-            compWin = (Reply == 1) ? compWin + 1 : compWin;
-            playerWin = (Reply == 2) ? playerWin + 1 : playerWin;
-            compScore.textContent = compWin;
-            playerScore.textContent = playerWin;
+            if (compWin == 5 || playerWin == 5) {
+                return;
+            }
+            onButtonClick('Rock')
         });
         const paper = document.querySelector('#Paper');
         paper.addEventListener('click', () => {
-            Reply = playRound('Paper', computerPlay());
-            compWin = (Reply == 1) ? compWin + 1 : compWin;
-            playerWin = (Reply == 2) ? playerWin + 1 : playerWin;
-            compScore.textContent = compWin;
-            playerScore.textContent = playerWin;
+            if (compWin == 5 || playerWin == 5) {
+                return;
+            }
+            onButtonClick('Paper')
         });
         const scissors = document.querySelector('#Scissors');
         scissors.addEventListener('click', () => {
-            Reply = playRound('Scissors', computerPlay());
-            compWin = (Reply == 1) ? compWin + 1 : compWin;
-            playerWin = (Reply == 2) ? playerWin + 1 : playerWin;
-            compScore.textContent = compWin;
-            playerScore.textContent = playerWin;
+            if (compWin == 5 || playerWin == 5) {
+                return;
+            }
+            onButtonClick('Scissors')
         });
         function computerPlay() {
             let move = Math.floor(Math.random()*3);
@@ -106,32 +105,39 @@
                         break;
                 }
             }
-            alert(reply);
+            printRoundResult(reply);
             return (compwin > 0 ? 1 : playerwin > 0 ? 2 : 0);
         }
-        function game() {
-            let playerSelection = capitalize(prompt());
-            let computerSelection = computerPlay();
-            console.log(playRound(playerSelection, computerSelection));
-            console.log('Computer: ' + compwin);
-            console.log('You: ' + playerwin);
-            let looping;
-            for ( looping = 0; looping < 4; looping++) {
-                playerSelection = capitalize(prompt());
-                computerSelection = computerPlay();
-                console.log(playRound(playerSelection, computerSelection));
-                console.log('Computer: ' + compwin);
-                console.log('You: ' + playerwin);
+        function printRoundResult(reply) {
+            const replyText = document.createElement('p');
+            replyText.textContent = reply;
+            results.appendChild(replyText);
+
+
+        }
+        function onButtonClick(choice) {
+            Reply = playRound(choice, computerPlay());
+            compWin = (Reply == 1) ? compWin + 1 : compWin;
+            playerWin = (Reply == 2) ? playerWin + 1 : playerWin;
+            compScore.textContent = compWin;
+            playerScore.textContent = playerWin;
+            if (compWin == 5 || playerWin == 5) {
+                if (compWin == 5) {
+                    printRoundResult('The computer wins!')
+                }
+                else {
+                    printRoundResult('You win!')
+                }
+                addReload();
             }
-            if (compwin > playerwin) {
-                console.log('The computer wins!');
-            }
-            else if (playerwin > compwin) {
-                console.log('You win!');
-            }
-            else {
-                console.log('You tied!');
-            }
+        }
+        function addReload() {
+            const reload = document.createElement('button');
+            reload.textContent = 'Click me to retry!';
+            container.appendChild(reload);
+            reload.addEventListener('click', () => {
+                window.location.reload();
+            });
         }
 
     </script>
